@@ -9,4 +9,8 @@ set ( SOURCES
   src/util/color.h
 )
 
+message (STATUS "Compiler ID: " ${CMAKE_CXX_COMPILER_ID})
+message (STATUS "Release flags: " ${CMAKE_CXX_FLAGS_RELEASE})
+message (STATUS "Debug flags: " ${CMAKE_CXX_FLAGS_DEBUG})
+
 add_executable(RayTracer ${SOURCES})
