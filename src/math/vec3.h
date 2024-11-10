@@ -28,19 +28,19 @@ class Vec3 {
 
   Vec3 operator-() const;
 
-  Vec3 operator-(const Vec3& v);
+  Vec3 operator-(const Vec3& v) const;
 
-  Vec3 operator+(const Vec3& v);
+  Vec3 operator+(const Vec3& v) const;
 
   Vec3 operator+=(const Vec3& v);
 
-  Vec3 operator*(const double scalar);
+  Vec3 operator*(const double scalar) const;
 
-  Vec3 operator*(const Vec3& v);
+  Vec3 operator*(const Vec3& v) const;
 
   Vec3 operator*=(const Vec3& v);
 
-  Vec3 operator/(const double scalar);
+  Vec3 operator/(const double scalar) const;
 
   Vec3 operator/=(const Vec3& v);
 
@@ -52,6 +52,8 @@ class Vec3 {
 inline std::ostream& operator<<(std::ostream& out, const Vec3& v) {
   return out << v.x() << ' ' << v.y() << ' ' << v.z();
 }
+
+using Point3 = Vec3;
 
 class Color : public Vec3 {
  public:

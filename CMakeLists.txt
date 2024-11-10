@@ -4,9 +4,10 @@ set(CMAKE_CXX_STANDARD 20)
 
 set ( SOURCES
   src/main.cc
+  src/math/ray.h
+  src/math/ray.cc
   src/math/vec3.h
   src/math/vec3.cc
-  src/util/color.h
 )
 
 message (STATUS "Compiler ID: " ${CMAKE_CXX_COMPILER_ID})
