@@ -25,7 +25,7 @@ Vec3 Vec3::cross(const Vec3& v) {
               (e_[0] * v.e_[1] - e_[1] * v.e_[0]));
 }
 
-Vec3 Vec3::unit_vector() { return *this / length(); }
+Vec3 Vec3::unit_vector() const { return *this / length(); }
 
 Vec3 Vec3::operator-() const { return Vec3(-e_[0], -e_[1], -e_[2]); }
 

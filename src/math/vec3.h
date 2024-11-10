@@ -6,6 +6,10 @@
 
 class Vec3 {
  public:
+  Vec3(Vec3&& v) : e_(std::move(v.e_)) {}
+
+  Vec3(const Vec3& v) : e_(v.e_) {}
+
   Vec3() : e_{0, 0, 0} {}
 
   Vec3(const double& e0, const double& e1, const double& e2) : e_{e0, e1, e2} {}
@@ -24,7 +28,7 @@ class Vec3 {
 
   Vec3 cross(const Vec3& v);
 
-  Vec3 unit_vector();
+  Vec3 unit_vector() const;
 
   Vec3 operator-() const;
 
@@ -53,10 +57,17 @@ inline std::ostream& operator<<(std::ostream& out, const Vec3& v) {
   return out << v.x() << ' ' << v.y() << ' ' << v.z();
 }
 
+inline Vec3 operator*(const double scalar, const Vec3& v) { return v * scalar; }
+
+// Helps distinguish points from actual vectors.
 using Point3 = Vec3;
 
 class Color : public Vec3 {
  public:
+  Color(const Vec3& v) : Vec3(v.x(), v.y(), v.z()) {}
+
+  Color(Vec3&& v) : Vec3(std::move(v)) {}
+
   Color() : Vec3() {}
 
   Color(const double& red, const double& green, const double& blue)
