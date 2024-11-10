@@ -1,50 +1,54 @@
 #ifndef VEC3_H
 #define VEC3_H
 
+#include <iostream>
 #include <vector>
 
 class Vec3 {
  public:
-  Vec3() : e{0, 0, 0} {}
+  Vec3() : e_{0, 0, 0} {}
 
-  Vec3(const double& e0, const double& e1, const double& e2) : e{e0, e1, e2} {}
+  Vec3(const double& e0, const double& e1, const double& e2) : e_{e0, e1, e2} {}
 
-  double x();
+  double x() const;
 
-  double y();
+  double y() const;
 
-  double z();
+  double z() const;
 
   double length() const;
 
   double length_squared() const;
 
-  Vec3 operator-() const { return Vec3(-e[0], -e[1], -e[2]); }
+  double dot(const Vec3& v) const;
 
-  Vec3 operator+=(const Vec3& v) {
-    e[0] += v.e[0];
-    e[1] += v.e[1];
-    e[2] += v.e[2];
-    return *this;
-  }
+  Vec3 cross(const Vec3& v);
 
-  Vec3 operator*=(const Vec3& v) {
-    e[0] *= v.e[0];
-    e[1] *= v.e[1];
-    e[2] *= v.e[2];
-    return *this;
-  }
+  Vec3 unit_vector();
 
-  Vec3 operator/=(const Vec3& v) {
-    e[0] /= v.e[0];
-    e[1] /= v.e[1];
-    e[2] /= v.e[2];
-    return *this;
-  }
+  Vec3 operator-() const;
+
+  Vec3 operator-(const Vec3& v);
+
+  Vec3 operator+(const Vec3& v);
+
+  Vec3 operator+=(const Vec3& v);
+
+  Vec3 operator*(const double scalar);
+
+  Vec3 operator*(const Vec3& v);
+
+  Vec3 operator*=(const Vec3& v);
+
+  Vec3 operator/(const double scalar);
+
+  Vec3 operator/=(const Vec3& v);
+
+  std::ostream& operator<<(std::ostream& out);
 
  private:
   // Stores the elements in this vector.
-  std::vector<double> e;
+  std::vector<double> e_;
 };
 
 #endif  // VEC3_H

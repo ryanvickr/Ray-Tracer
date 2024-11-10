@@ -4,6 +4,11 @@
 
 int main(int, char**) {
 
+    Vec3 v1(0,1,2);
+    Vec3 v2(3,2,1);
+
+    auto v3 = v1 * 2.0;
+
   // Image
 
   int image_width = 256;
