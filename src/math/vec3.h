@@ -44,11 +44,35 @@ class Vec3 {
 
   Vec3 operator/=(const Vec3& v);
 
-  std::ostream& operator<<(std::ostream& out);
-
  private:
   // Stores the elements in this vector.
   std::vector<double> e_;
 };
+
+inline std::ostream& operator<<(std::ostream& out, const Vec3& v) {
+  return out << v.x() << ' ' << v.y() << ' ' << v.z();
+}
+
+class Color : public Vec3 {
+ public:
+  Color() : Vec3() {}
+
+  Color(const double& red, const double& green, const double& blue)
+      : Vec3(red, green, blue) {}
+};
+
+inline std::ostream& operator<<(std::ostream& out, const Color& color) {
+  auto r = color.x();
+  auto g = color.y();
+  auto b = color.z();
+
+  // Translate the [0,1] component values to the byte range [0,255].
+  int rbyte = int(255.999 * r);
+  int gbyte = int(255.999 * g);
+  int bbyte = int(255.999 * b);
+
+  // Write out the pixel color components.
+  return out << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';
+}
 
 #endif  // VEC3_H

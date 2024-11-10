@@ -69,7 +69,3 @@ Vec3 Vec3::operator/=(const Vec3& v) {
   e_[2] /= v.e_[2];
   return *this;
 }
-
-std::ostream& Vec3::operator<<(std::ostream& out) {
-  return out << e_[0] << ' ' << e_[1] << ' ' << e_[2];
-}
