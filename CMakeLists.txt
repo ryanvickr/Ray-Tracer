@@ -8,6 +8,8 @@ set ( SOURCES
   src/math/ray.cc
   src/math/vec3.h
   src/math/vec3.cc
+  src/objects/sphere.h
+  src/objects/sphere.cc
 )
 
 message (STATUS "Compiler ID: " ${CMAKE_CXX_COMPILER_ID})

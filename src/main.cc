@@ -4,8 +4,16 @@
 
 #include "math/ray.h"
 #include "math/vec3.h"
+#include "objects/sphere.h"
+
+Point3 point(0, 0, -1);
+Sphere sphere(point, 0.5);
 
 Color ray_color(const Ray& r) {
+  if (sphere.collidesWithRay(r)) {
+    return Color(1, 0, 0);
+  }
+
   const Vec3 unit_direction = r.direction().unit_vector();
   double a = (unit_direction.y() + 1.0) * 0.5;
   Color test = Color(1.0, 1.0, 0) + Color(0, 0, 0);
