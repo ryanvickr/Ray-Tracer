@@ -8,8 +8,8 @@
 Color ray_color(const Ray& r) {
   const Vec3 unit_direction = r.direction().unit_vector();
   double a = (unit_direction.y() + 1.0) * 0.5;
-  Color test = Color(1.0, 1.0, 0) + Color(0,0,0);
-  return (1.0-a)*Color(1.0, 1.0, 1.0) + a*Color(0.5, 0.7, 1.0);
+  Color test = Color(1.0, 1.0, 0) + Color(0, 0, 0);
+  return (1.0 - a) * Color(1.0, 1.0, 1.0) + a * Color(0.5, 0.7, 1.0);
 }
 
 int main(int, char**) {
@@ -49,7 +49,8 @@ int main(int, char**) {
     std::clog << "\rScanlines remaining: " << (image_height - j) << ' '
               << std::flush;
     for (int i = 0; i < image_width; i++) {
-      const auto pixel_center = pixel00_loc + (unit_vec_u * i) + (unit_vec_v * j);
+      const auto pixel_center =
+          pixel00_loc + (unit_vec_u * i) + (unit_vec_v * j);
       const auto ray_direction = pixel_center - camera_center;
       Ray r(camera_center, ray_direction);
       Color pixel_color = ray_color(r);
