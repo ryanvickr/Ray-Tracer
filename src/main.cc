@@ -10,8 +10,12 @@ Point3 point(0, 0, -1);
 Sphere sphere(point, 0.5);
 
 Color ray_color(const Ray& r) {
-  if (sphere.collidesWithRay(r)) {
-    return Color(1, 0, 0);
+  double t = sphere.distanceFromSphere(r);
+  // Check whether the ray collides with the sphere.
+  if (t > 0.0) {
+    // Normal vector is the point of collision minus the centroid.
+    Vec3 normal = (r.at(t) - Vec3(0, 0, -1)).unit_vector();
+    return 0.5 * Color(normal.x() + 1, normal.y() + 1, normal.z() + 1);
   }
 
   const Vec3 unit_direction = r.direction().unit_vector();

@@ -7,7 +7,7 @@ const Point3& Sphere::centroid() const { return centroid_; }
 
 double Sphere::radius() const { return radius_; }
 
-bool Sphere::collidesWithRay(const Ray& r) const {
+double Sphere::distanceFromSphere(const Ray& r) const {
   const Vec3 oc = centroid_ - r.origin();
 
   const double a = r.direction().dot(r.direction());
@@ -18,5 +18,12 @@ bool Sphere::collidesWithRay(const Ray& r) const {
   // tells us that this ray intersects with the sphere
   // at some point.
   const double discriminant = b * b - 4 * a * c;
-  return discriminant >= 0;
+  
+  
+  if (discriminant < 0) {
+    // This ray doesn't intersect with this sphere.
+    return -1;
+  } else {
+    return (-b - std::sqrt(discriminant)) / (2.0 * a);
+  }
 }

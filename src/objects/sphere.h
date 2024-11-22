@@ -13,7 +13,10 @@ class Sphere {
 
   double radius() const;
 
-  bool collidesWithRay(const Ray& r) const;
+  // This function checks whether the ray collides with the sphere,
+  // and if so, it returns the t value which is the distance. If
+  // not, then it will return -1.0 (invalid, aka does not intersect).
+  double distanceFromSphere(const Ray& r) const;
 
  private:
   const Point3 centroid_;
