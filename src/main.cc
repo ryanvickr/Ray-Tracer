@@ -60,6 +60,7 @@ int main(int, char**) {
   for (int j = 0; j < image_height; j++) {
     std::clog << "\rScanlines remaining: " << (image_height - j) << ' '
               << std::flush;
+    #pragma unroll
     for (int i = 0; i < image_width; i++) {
       const auto pixel_center =
           pixel00_loc + (unit_vec_u * i) + (unit_vec_v * j);
