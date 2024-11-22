@@ -30,7 +30,7 @@ double Sphere::distanceFromSphere(const Ray& r) const {
     // This ray doesn't intersect with this sphere.
     return -1;
   } else {
-    return (h - std::sqrt(discriminant)) / (2.0 * a);
+    return (h - std::sqrt(discriminant)) / a;
   }
 }
 
