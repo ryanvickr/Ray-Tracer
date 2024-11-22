@@ -8,6 +8,7 @@ set ( SOURCES
   src/math/ray.cc
   src/math/vec3.h
   src/math/vec3.cc
+  src/objects/hittable.h
   src/objects/sphere.h
   src/objects/sphere.cc
 )

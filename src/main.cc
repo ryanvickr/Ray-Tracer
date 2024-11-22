@@ -7,7 +7,7 @@
 #include "objects/sphere.h"
 
 Point3 point(0, 0, -1);
-Sphere sphere(point, 0.5);
+object::Sphere sphere(point, 0.5);
 
 Color ray_color(const Ray& r) {
   double t = sphere.distanceFromSphere(r);
@@ -60,7 +60,7 @@ int main(int, char**) {
   for (int j = 0; j < image_height; j++) {
     std::clog << "\rScanlines remaining: " << (image_height - j) << ' '
               << std::flush;
-    #pragma unroll
+    #pragma unroll  // Unroll the inner loop
     for (int i = 0; i < image_width; i++) {
       const auto pixel_center =
           pixel00_loc + (unit_vec_u * i) + (unit_vec_v * j);

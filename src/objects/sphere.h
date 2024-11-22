@@ -1,13 +1,17 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
+#include <optional>
 #include "../math/ray.h"
 #include "../math/vec3.h"
+#include "hittable.h"
 
-class Sphere {
+namespace object {
+
+class Sphere : public Hittable {
  public:
   Sphere(const Point3& centroid, const double radius)
-      : centroid_(centroid), radius_(radius) {}
+      : centroid_(centroid), radius_(std::fmax(0, radius)) {}
 
   const Point3& centroid() const;
 
@@ -20,9 +24,16 @@ class Sphere {
   // Uses a more efficient calculation of the quadratic formula.
   double distanceFromSphere(const Ray& r) const;
 
+  std::optional<HitRecord> get_hit(const Ray& ray, const double ray_tmin,
+                                   const double ray_tmax) const override;
+
+  ~Sphere() override = default;
+
  private:
   const Point3 centroid_;
   const double radius_;
 };
+
+}  // namespace object
 
 #endif  // SPHERE_H
