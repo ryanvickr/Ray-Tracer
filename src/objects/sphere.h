@@ -16,6 +16,8 @@ class Sphere {
   // This function checks whether the ray collides with the sphere,
   // and if so, it returns the t value which is the distance. If
   // not, then it will return -1.0 (invalid, aka does not intersect).
+  //
+  // Uses a more efficient calculation of the quadratic formula.
   double distanceFromSphere(const Ray& r) const;
 
  private:
