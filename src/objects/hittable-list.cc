@@ -24,7 +24,7 @@ std::optional<HitRecord> HittableList::get_hit(const Ray& ray,
   double closest_t = ray_tmax;
 
   for (const auto& object : objects_) {
-    auto hit_rec = object->get_hit(ray, ray_tmin, ray_tmax);
+    auto hit_rec = object->get_hit(ray, ray_tmin, closest_t);
     if (!hit_rec.has_value()) continue;
 
     found_hit = true;

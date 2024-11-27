@@ -30,10 +30,10 @@ int main(int, char**) {
   const int image_height = std::max(int(image_width / aspect_ratio), 1);
 
   object::HittableList world;
-  // Ground object
-  world.add(std::make_unique<object::Sphere>(Point3(0, -100.5, -1), 100));
   // Sphere
   world.add(std::make_unique<object::Sphere>(Point3(0, 0, -1), 0.5));
+  // Ground object
+  world.add(std::make_unique<object::Sphere>(Point3(0, -100.5, -1), 100));
 
   // Camera
   const double focal_length = 1.0;  // distance from camera center to viewport.
