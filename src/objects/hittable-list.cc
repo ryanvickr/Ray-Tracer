@@ -13,7 +13,7 @@ HittableList::HittableList(std::unique_ptr<Hittable> object) {
 void HittableList::clear() { objects_.clear(); }
 
 void HittableList::add(std::unique_ptr<Hittable> object) {
-  objects_.emplace_back(std::move(object));
+  objects_.push_back(std::move(object));
 }
 
 std::optional<HitRecord> HittableList::get_hit(const Ray& ray,
