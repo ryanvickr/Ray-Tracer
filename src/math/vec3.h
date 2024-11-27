@@ -3,13 +3,10 @@
 
 #include <iostream>
 #include <vector>
+#include <utility>
 
 class Vec3 {
  public:
-  Vec3(Vec3&& v) : e_(std::move(v.e_)) {}
-
-  Vec3(const Vec3& v) : e_(v.e_) {}
-
   Vec3() : e_{0, 0, 0} {}
 
   Vec3(const double& e0, const double& e1, const double& e2) : e_{e0, e1, e2} {}
@@ -64,14 +61,12 @@ using Point3 = Vec3;
 
 class Color : public Vec3 {
  public:
-  Color(const Vec3& v) : Vec3(v.x(), v.y(), v.z()) {}
-
-  Color(Vec3&& v) : Vec3(std::move(v)) {}
-
   Color() : Vec3() {}
 
   Color(const double& red, const double& green, const double& blue)
       : Vec3(red, green, blue) {}
+
+  Color(Vec3&& v) : Vec3(std::move(v)) {}
 };
 
 inline std::ostream& operator<<(std::ostream& out, const Color& color) {
