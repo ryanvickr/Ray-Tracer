@@ -1,9 +1,9 @@
-#ifndef UTIL_H
-#define UTIL_H
+#ifndef MATH_UTIL_H
+#define MATH_UTIL_H
 
 #include <limits>
 
-namespace util {
+namespace math_util {
 
 // Constants
 
@@ -16,6 +16,6 @@ inline double degrees_to_radians(const double degrees) {
   return degrees * PI / 180.0;
 }
 
-}  // namespace util
+}  // namespace math_util
 
-#endif  // UTIL_H
+#endif  // MATH_UTIL_H
