@@ -17,6 +17,8 @@ set ( SOURCES
   src/objects/hittable-list.cc
   src/objects/sphere.h
   src/objects/sphere.cc
+  src/rendering/camera.h
+  src/rendering/camera.cc
 )
 
 message (STATUS "Compiler ID: " ${CMAKE_CXX_COMPILER_ID})
