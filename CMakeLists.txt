@@ -6,6 +6,7 @@ set ( SOURCES
   src/main.cc
   src/math/ray.h
   src/math/ray.cc
+  src/math/util.h
   src/math/vec3.h
   src/math/vec3.cc
   src/objects/hittable.h
