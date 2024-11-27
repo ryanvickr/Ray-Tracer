@@ -24,8 +24,8 @@ class HittableList : public Hittable {
   /// @param ray_tmax the maximum distanc at which we can have a collision
   /// @return returns a `HitRecord` for the first object hit. Returns
   /// `std::nullopt` if there were no collisions
-  std::optional<HitRecord> get_hit(const Ray& ray, const double ray_tmin,
-                                   const double ray_tmax) const override;
+  std::optional<HitRecord> get_hit(const Ray& ray,
+                                   const Interval& ray_t_bounds) const override;
 
  private:
   std::vector<std::unique_ptr<Hittable>> objects_;

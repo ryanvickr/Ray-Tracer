@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "math/interval.h"
 #include "math/ray.h"
 #include "math/util.h"
 #include "math/vec3.h"
@@ -11,7 +12,7 @@
 
 // Temporary helper function to hard-code color generation
 Color ray_color(const Ray& r, const object::HittableList& world) {
-  auto hit_record = world.get_hit(r, 0, math_utils::INF);
+  auto hit_record = world.get_hit(r, Interval(0, math_utils::INF));
   if (hit_record.has_value()) {
     return 0.5 * (hit_record->normal + Color(1, 1, 1));
   }

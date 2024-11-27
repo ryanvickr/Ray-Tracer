@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "../math/interval.h"
 #include "hittable.h"
 
 namespace object {
@@ -16,15 +17,15 @@ void HittableList::add(std::unique_ptr<Hittable> object) {
   objects_.push_back(std::move(object));
 }
 
-std::optional<HitRecord> HittableList::get_hit(const Ray& ray,
-                                               const double ray_tmin,
-                                               const double ray_tmax) const {
+std::optional<HitRecord> HittableList::get_hit(
+    const Ray& ray, const Interval& ray_t_bounds) const {
   HitRecord rec;
   bool found_hit = false;
-  double closest_t = ray_tmax;
+  double closest_t = ray_t_bounds.max();
 
   for (const auto& object : objects_) {
-    auto hit_rec = object->get_hit(ray, ray_tmin, closest_t);
+    auto hit_rec =
+        object->get_hit(ray, Interval(ray_t_bounds.min(), closest_t));
     if (!hit_rec.has_value()) continue;
 
     found_hit = true;

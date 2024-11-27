@@ -2,6 +2,7 @@
 
 #include <optional>
 
+#include "../math/interval.h"
 #include "../math/ray.h"
 #include "../math/vec3.h"
 
@@ -34,8 +35,8 @@ double Sphere::distanceFromSphere(const Ray& r) const {
   }
 }
 
-std::optional<HitRecord> Sphere::get_hit(const Ray& ray, const double ray_tmin,
-                                         const double ray_tmax) const {
+std::optional<HitRecord> Sphere::get_hit(const Ray& ray,
+                                         const Interval& ray_t_bounds) const {
   const Vec3 oc = centroid_ - ray.origin();
 
   // A vector dotted by itself is equal to the squared length
@@ -56,18 +57,18 @@ std::optional<HitRecord> Sphere::get_hit(const Ray& ray, const double ray_tmin,
   // Now find the nearest root within the allowable range. This is the
   // simplified quadratic equation for a sphere.
   double root = (h - sqrtd) / a;
-  if (root <= ray_tmin || root >= ray_tmax) {
+  if (!ray_t_bounds.surrounds(root)) {
     // Try the other root if this is invalid.
     root = (h + sqrtd) / a;
-    if (root <= ray_tmin || root >= ray_tmax) return std::nullopt;
+    if (!ray_t_bounds.surrounds(root)) return std::nullopt;
   }
 
   // We have a valid hit point, create the `HitRecord` object and return it.
   Point3 p = ray.at(root);
   Vec3 normal = (p - centroid_) / radius_;
-  HitRecord rec {
-    .t = std::move(root),
-    .p = std::move(p),
+  HitRecord rec{
+      .t = std::move(root),
+      .p = std::move(p),
   };
   rec.set_face_normal(ray, std::move(normal));
 

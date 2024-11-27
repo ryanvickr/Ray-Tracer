@@ -1,6 +1,7 @@
 #ifndef HITTABLE_H
 #define HITTABLE_H
 
+#include "../math/interval.h"
 #include "../math/ray.h"
 #include "../math/vec3.h"
 
@@ -30,9 +31,8 @@ class Hittable {
  public:
   virtual ~Hittable() = default;
 
-  virtual std::optional<HitRecord> get_hit(const Ray& ray,
-                                           const double ray_tmin,
-                                           const double ray_tmax) const = 0;
+  virtual std::optional<HitRecord> get_hit(
+      const Ray& ray, const Interval& ray_t_bounds) const = 0;
 };
 
 }  // namespace object

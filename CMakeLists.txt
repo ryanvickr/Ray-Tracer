@@ -4,6 +4,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 set ( SOURCES
   src/main.cc
+  src/math/interval.h
+  src/math/interval.cc
   src/math/ray.h
   src/math/ray.cc
   src/math/util.h

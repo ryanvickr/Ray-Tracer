@@ -2,6 +2,8 @@
 #define SPHERE_H
 
 #include <optional>
+
+#include "../math/interval.h"
 #include "../math/ray.h"
 #include "../math/vec3.h"
 #include "hittable.h"
@@ -24,8 +26,8 @@ class Sphere : public Hittable {
   // Uses a more efficient calculation of the quadratic formula.
   double distanceFromSphere(const Ray& r) const;
 
-  std::optional<HitRecord> get_hit(const Ray& ray, const double ray_tmin,
-                                   const double ray_tmax) const override;
+  std::optional<HitRecord> get_hit(const Ray& ray,
+                                   const Interval& ray_t_bounds) const override;
 
  private:
   const Point3 centroid_;
