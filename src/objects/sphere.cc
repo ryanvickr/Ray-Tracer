@@ -63,11 +63,13 @@ std::optional<HitRecord> Sphere::get_hit(const Ray& ray, const double ray_tmin,
   }
 
   // We have a valid hit point, create the `HitRecord` object and return it.
-  HitRecord rec = {.t = root,
-                   .p = ray.at(root),
-                   // Surface normal unit vector is the hit point minus the
-                   // centroid / length.
-                   .normal = (rec.p - centroid_) / radius_};
+  Point3 p = ray.at(root);
+  Vec3 normal = (p - centroid_) / radius_;
+  HitRecord rec {
+    .t = std::move(root),
+    .p = std::move(p),
+  };
+  rec.set_face_normal(ray, rec.normal);
 
   return rec;
 }

@@ -9,6 +9,7 @@ set ( SOURCES
   src/math/vec3.h
   src/math/vec3.cc
   src/objects/hittable.h
+  src/objects/hittable.cc
   src/objects/sphere.h
   src/objects/sphere.cc
 )
