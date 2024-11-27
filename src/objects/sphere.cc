@@ -69,7 +69,7 @@ std::optional<HitRecord> Sphere::get_hit(const Ray& ray, const double ray_tmin,
     .t = std::move(root),
     .p = std::move(p),
   };
-  rec.set_face_normal(ray, rec.normal);
+  rec.set_face_normal(ray, std::move(normal));
 
   return rec;
 }

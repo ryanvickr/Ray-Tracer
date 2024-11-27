@@ -19,7 +19,7 @@ struct HitRecord {
   /// `normal` so that is has the correct direction.
   /// @param r the `Ray` which made contact with this point
   /// @param outward_normal the surface normal unit vector (pointing outwards)
-  void set_face_normal(const Ray& r, const Vec3& outward_normal);
+  void set_face_normal(const Ray& r, Vec3&& outward_normal);
 };
 
 // A pure virtual class for a hittable object.

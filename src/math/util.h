@@ -3,11 +3,11 @@
 
 #include <limits>
 
-namespace math_util {
+namespace math_utils {
 
 // Constants
 
-static const double INFINITY = std::numeric_limits<double>::infinity();
+static const double INF = std::numeric_limits<double>::infinity();
 static const double PI = 3.1415926535897932385;
 
 // Utility Functions

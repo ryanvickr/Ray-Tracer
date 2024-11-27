@@ -3,24 +3,21 @@
 #include <iostream>
 
 #include "math/ray.h"
+#include "math/util.h"
 #include "math/vec3.h"
+#include "objects/hittable-list.h"
+#include "objects/hittable.h"
 #include "objects/sphere.h"
 
-Point3 point(0, 0, -1);
-object::Sphere sphere(point, 0.5);
-
-Color ray_color(const Ray& r) {
-  double t = sphere.distanceFromSphere(r);
-  // Check whether the ray collides with the sphere.
-  if (t > 0.0) {
-    // Normal vector is the point of collision minus the centroid.
-    Vec3 normal = (r.at(t) - Vec3(0, 0, -1)).unit_vector();
-    return 0.5 * Color(normal.x() + 1, normal.y() + 1, normal.z() + 1);
+// Temporary helper function to hard-code color generation
+Color ray_color(const Ray& r, const object::HittableList& world) {
+  auto hit_record = world.get_hit(r, 0, math_utils::INF);
+  if (hit_record.has_value()) {
+    return 0.5 * (hit_record->normal + Color(1, 1, 1));
   }
 
   const Vec3 unit_direction = r.direction().unit_vector();
   double a = (unit_direction.y() + 1.0) * 0.5;
-  Color test = Color(1.0, 1.0, 0) + Color(0, 0, 0);
   return (1.0 - a) * Color(1.0, 1.0, 1.0) + a * Color(0.5, 0.7, 1.0);
 }
 
@@ -31,6 +28,12 @@ int main(int, char**) {
 
   // Calculate image height from the ratio, ensuring it is at least 1 pixel.
   const int image_height = std::max(int(image_width / aspect_ratio), 1);
+
+  object::HittableList world;
+  // Ground object
+  world.add(std::make_unique<object::Sphere>(Point3(0, -100.5, -1), 100));
+  // Sphere
+  world.add(std::make_unique<object::Sphere>(Point3(0, 0, -1), 0.5));
 
   // Camera
   const double focal_length = 1.0;  // distance from camera center to viewport.
@@ -65,7 +68,7 @@ int main(int, char**) {
           pixel00_loc + (unit_vec_u * i) + (unit_vec_v * j);
       const auto ray_direction = pixel_center - camera_center;
       Ray r(camera_center, std::move(ray_direction));
-      Color pixel_color = ray_color(r);
+      Color pixel_color = ray_color(r, world);
       std::cout << pixel_color;
     }
   }
