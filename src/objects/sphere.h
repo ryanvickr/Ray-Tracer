@@ -27,8 +27,6 @@ class Sphere : public Hittable {
   std::optional<HitRecord> get_hit(const Ray& ray, const double ray_tmin,
                                    const double ray_tmax) const override;
 
-  ~Sphere() override = default;
-
  private:
   const Point3 centroid_;
   const double radius_;

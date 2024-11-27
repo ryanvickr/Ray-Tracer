@@ -10,6 +10,8 @@ set ( SOURCES
   src/math/vec3.cc
   src/objects/hittable.h
   src/objects/hittable.cc
+  src/objects/hittable-list.h
+  src/objects/hittable-list.cc
   src/objects/sphere.h
   src/objects/sphere.cc
 )
