@@ -64,7 +64,7 @@ int main(int, char**) {
       const auto pixel_center =
           pixel00_loc + (unit_vec_u * i) + (unit_vec_v * j);
       const auto ray_direction = pixel_center - camera_center;
-      Ray r(camera_center, ray_direction);
+      Ray r(camera_center, std::move(ray_direction));
       Color pixel_color = ray_color(r);
       std::cout << pixel_color;
     }
